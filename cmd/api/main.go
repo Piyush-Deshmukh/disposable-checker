@@ -11,6 +11,7 @@ import (
 
 	"github.com/Piyush-Deshmukh/disposable-checker/internal/config"
 	"github.com/Piyush-Deshmukh/disposable-checker/internal/server"
+	"github.com/Piyush-Deshmukh/disposable-checker/pkg/validator"
 )
 
 func main() {
@@ -24,6 +25,11 @@ func main() {
 			log.Fatalf("❌ Failed to start server: %v", err)
 		}
 	}()
+
+	// Load disposable domains from public repos
+	if err := validator.LoadDisposableDomains(); err != nil {
+		log.Fatalf("Failed to load disposable domains: %v", err)
+	}
 
 	// Wait for shutdown signal (CTRL+C / SIGTERM)
 	stopChan := make(chan os.Signal, 1)
