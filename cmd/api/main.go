@@ -31,6 +31,11 @@ func main() {
 		log.Fatalf("Failed to load disposable domains: %v", err)
 	}
 
+	// Load disposable phone numbers
+	if err := validator.LoadDisposablePhones(); err != nil {
+		log.Fatalf("Failed to load disposable phone numbers: %v", err)
+	}
+
 	// Wait for shutdown signal (CTRL+C / SIGTERM)
 	stopChan := make(chan os.Signal, 1)
 	signal.Notify(stopChan, syscall.SIGINT, syscall.SIGTERM)

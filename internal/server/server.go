@@ -22,6 +22,7 @@ func NewServer(cfg *config.Config) *http.Server {
 	})
 
 	router.POST("/validate/email", handlers.ValidateEmailHandler)
+	router.POST("/validate/phone", handlers.ValidatePhoneHandler)
 
 	return &http.Server{
 		Addr:    fmt.Sprintf(":%s", cfg.Port),
